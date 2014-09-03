@@ -1,0 +1,16 @@
+!!! 5
+%html
+  %head
+    %title EditMe
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+
+  %body
+    %header.navbar.navbar-fixed-top.navbar-inverse
+      %div.navbar-inner
+        %div.container
+          = link_to 'edit-me', '#', id: 'logo'
+    %div.container
+      = yield
+
