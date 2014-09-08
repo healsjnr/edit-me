@@ -8,7 +8,8 @@ RUN apt-get update -q
 RUN apt-get install -qy nginx
 RUN apt-get install -qy curl
 RUN apt-get install -qy nodejs
-RUN apt-get install -qy postgresql-devel
+RUN apt-get install -qy postgresql-9.1
+RUN apt-get install -qy libpq-dev
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Install rvm, ruby, bundler
