@@ -11,12 +11,27 @@ $grayMediumLight: #eaeaea;
 
 /* application wide */
 
-html {
-  overflow-y: scroll;
+// RESETS
+html,
+body,
+div,
+h1,
+p,
+a,
+video {
+  margin: 0;
+  padding: 0;
+}
+
+
+html, body {
+  height:100%;
 }
 
 body {
-  padding-top: 60px;
+  margin:0;
+  padding-top: 50px;
+  font-family: "Oxygen", sans-serif;
 }
 
 section {
@@ -31,9 +46,6 @@ textarea {
   text-align: center;
 }
 
-.center h1 {
-  margin-bottom: 60px;
-}
 
 /* typography */
 
@@ -44,14 +56,12 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-size: 3em;
   letter-spacing: -2px;
-  margin-bottom: 30px;
   text-align: center;
 }
 
 h2 {
   font-size: 1.2em;
   letter-spacing: -1px;
-  margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
   color: #999;
@@ -62,17 +72,6 @@ p {
   line-height: 1.7em;
 }
 
-/* splash */
-
-.splash {
-  h1 {
-    font-size: 12em;
-    margin-top: 60px;
-    margin-bottom: 60px;
-    font-weight: bold;
-    color: #999;
-  }
-}
 /* header */
 
 #logo {
@@ -91,6 +90,8 @@ p {
   text-decoration: none;
 }
 
+
+
 /* miscellaneous */
 
 .debug_dump {
@@ -104,7 +105,7 @@ p {
 /* footer */
 
 footer {
-  margin-top: 45px;
+  margin-top: 0px;
   padding-top: 5px;
   border-top: 1px solid $grayMediumLight;
   color: #777;

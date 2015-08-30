@@ -1,3 +1,40 @@
 // Place all the styles related to the splash_pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.container-fluid-full-width {
+  @extend .container-fluid;
+  position: relative;
+  top: 10%;
+  margin: 0 auto;
+  z-index: 3;
+}
+
+/* splash */
+
+.splash {
+  min-height: 100%;
+
+  h1 {
+    font-size: 12em;
+    margin-top: 60px;
+    margin-bottom: 40px;
+    font-weight: bold;
+    color: #BBB;
+  }
+}
+
+.background-video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -10;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  background: url(edit-me-hero.jpeg) no-repeat;
+}

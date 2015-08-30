@@ -8,15 +8,15 @@ RSpec.describe 'UserPages', :type => :request do
   subject { page }
 
   it 'should return 200' do
-    get signup_path
+    get new_user_registration_path
     expect(response).to have_http_status(200)
   end
 
   describe 'signup page' do
-    before { visit signup_path }
+    before { visit new_user_registration_path }
     it 'should have signup content' do
       expect(page).to have_content('Sign up')
-      expect(page).to have_title(full_title('Sign up'))
+      expect(page).to have_title(full_title('Sign Up'))
     end
   end
 
