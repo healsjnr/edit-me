@@ -15,7 +15,6 @@ describe User do
     expect(@user).to respond_to :password
     expect(@user).to respond_to :password_confirmation
     expect(@user).to respond_to :encrypted_password
-    expect(@user).to respond_to :authenticate
   end
 
   def test_values_are_valid(base_user, attribute, values, valid)
@@ -34,7 +33,7 @@ describe User do
     it 'name is present' do
       names = %w[first_name last_name]
       names.each do |n|
-       test_values_are_valid(@user,n, @empty_values, false)
+       test_values_are_valid(@user, n, @empty_values, false)
       end
     end #must_match daver loves kater kind_of?
 
@@ -75,7 +74,6 @@ describe User do
         test_user.password = pwd
         test_user.password_confirmation = pwd
         expect(test_user).to be_valid
-
       end
     end
 
