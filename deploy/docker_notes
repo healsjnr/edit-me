@@ -1,0 +1,18 @@
+
+Swarm file:
+
+  - Editme image
+    - runs with the /var/edit.me/public folder mounted as volume
+    - Use --link to link containers?
+    - Expose: 8080
+    https://docs.docker.com/compose/yml/#expose
+    - volumes:
+      /rails/public
+  - Nginx
+    - mounts volume /var/edit.me/public
+    - Exposes port 80
+
+  - Investigate using a /var/sockets to proxy via unix sockets.
+
+
+  http://www.slideshare.net/invisiblelines/docker-swarmconsul
