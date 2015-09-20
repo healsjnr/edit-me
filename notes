@@ -1,0 +1,10 @@
+Video encoding:
+
+brew install ffmpeg --with-libvpx --with-libvorbis
+
+webm: ffmpeg -i splash_1.avi -an -b:v 792k splash_1.webm
+h264/mp4: ffmpeg -i splash_1.avi -an -vcodec libx264 -crf 23 splash_1_h264.mp4
+
+first frame:
+
+ffmpeg -i splash_1.avi -vframes 1 -f image2 splash_1.jpg
