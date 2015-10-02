@@ -36,5 +36,14 @@
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  background: url(edit-me-hero.jpeg) no-repeat;
+  background: url(asset-path('splash_1.jpg')) no-repeat;
+}
+
+.content_blocked {
+  display: inline-block;
+  padding: 12px 48px;
+  color: #ff3c64;
+  font-size: 22px;
+  text-decoration: none;
+  border: solid 4px #ff3c64;
 }

@@ -1,9 +1,19 @@
 <div class="container-fluid-full-width center splash">
   <h1>edit-me</h1>
   <h2>coming soon. info@edit-me.net to find out more.</h2>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-1 content_blocked">
+        Writers Sign Up
+      </div>
+      <div class="col-md-4 col-md-offset-2 content_blocked">
+        Editor Sign Up
+      </div>
+    </div>
+  </div>
 </div>
-<video id="background-video" class="background-video" autoplay loop muted poster="assets/splash_1.jpg">
-  <source src="assets/splash_1.webm" type="video/mp4">
-  <source src="assets/splash_1_h264.mp4" type="video/mp4">
+<video id="background-video" class="background-video" autoplay loop muted poster="<%= asset_path('splash_1.jpg') %>">
+  <source src="<%= asset_path('splash_1.webm')%>" type="video/mp4">
+  <source src="<%= asset_path('splash_1_h264.mp4')%>" type="video/mp4">
 </video>
 
