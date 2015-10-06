@@ -8,7 +8,6 @@
 /tmp
 /public/assets
 # Ignore other unneeded files.
-doc/
 *.swp
 1.3. VERSIONCONTROLWITHGIT 39
 *~

@@ -1,0 +1,38 @@
+dev.edit-me.net
+  - Mapped to host edit-me-dev
+  - uses the edit_me_rsa identity
+  - user is edit-me 
+
+setup:
+  - Use init script to pull down docker image and start
+  - Rails only, not using compose yet for nginx
+  - Add deploy user
+  - run init script as deploy
+  - Note: Docker login must be run to create auth to allow acces to priavte repo.
+
+Todo:
+  - Create init script
+  - apt-get install inotify-tools
+  - do docker loging as docker user
+
+/etc/init/edit-me-dev.conf =>
+
+description 'edit-me-dev'
+author 'ol'
+start on filesystem and started docker
+stop on runlevel [!2345]
+respawn
+script
+  # Wait for docker to finish starting up first.
+  FILE=/var/run/docker.sock
+  while [ ! -e \\$FILE ] ; do
+    inotifywait -t 2 -e create .
+  done
+  if /usr/bin/docker ps -a | grep -q edit-me-dev; then
+    echo "Starting existing container"
+    /usr/bin/docker start -a edit-me-dev
+  else
+    echo "Runing edit-me-dev container"
+    /usr/bin/docker run --name edit-me-dev -p 80:8080 healsjnr/edit-me-dev 
+  fi
+end script
