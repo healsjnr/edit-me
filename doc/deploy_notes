@@ -1,20 +1,20 @@
 dev.edit-me.net
-  - Mapped to host edit-me-dev
+  - host is edit-me-dev
   - uses the edit_me_rsa identity
   - user is edit-me 
+  - password as expected.
 
-setup:
+Notes on setup:
   - Use init script to pull down docker image and start
   - Rails only, not using compose yet for nginx
-  - Add deploy user
-  - run init script as deploy
   - Note: Docker login must be run to create auth to allow acces to priavte repo.
 
-Todo:
-  - Create init script
-  - apt-get install inotify-tools
-  - do docker loging as docker user
+To Deploy a new build:
+  - Commit to develop
+  - Check that dockerhup has build the latest version
+  - Log in to digital ocean. Run the rebuild from initial snapshot option under destroy.
 
+## INIT script on docker dev.
 /etc/init/edit-me-dev.conf =>
 
 description 'edit-me-dev'
