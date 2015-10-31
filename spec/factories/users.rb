@@ -1,8 +1,7 @@
 # Devise User Class
 FactoryGirl.define do
+  puts "creating factory girl instance."
   factory :user do
-    first_name "Factory"
-    last_name "Girl"
     email "basicuser@mvmanor.co.uk"
     password "password1234"
     password_confirmation "password1234"

@@ -8,8 +8,14 @@ class User < ActiveRecord::Base
 
   before_save { self.email = email.downcase }
 
-  validates :first_name, presence: true
-  validates :last_name, presence: true
+  has_one :user_detail
+  accepts_nested_attributes_for :user_detail
+
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false}
+
+  def with_user_details
+    self.build_user_detail
+    self
+  end
 end

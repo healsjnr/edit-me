@@ -5,15 +5,21 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :first_name%><br />
-    <%= f.text_field :first_name, autofocus: true %>
-  </div>
+    <!-- Use the details int this SO to link users and user details:
+      http://stackoverflow.com/questions/1231608/rails-user-input-for-multiple-models-on-a-single-form-how
+      http://stackoverflow.com/questions/3546289/override-devise-registrations-controller
+    -->
+    <% f.fields_for :user_detail, UserDetail.new  do |user_detail_form| %>
+        <div class="field">
+          <%= user_detail_form.label :first_name %><br />
+          <%= user_detail_form.text_field :first_name, autofocus: true %>
+        </div>
 
-  <div class="field">
-    <%= f.label :last_name%><br />
-    <%= f.text_field :last_name %>
-  </div>
+        <div class="field">
+          <%= user_detail_form.label :last_name%><br />
+          <%= user_detail_form.text_field :last_name %>
+        </div>
+    <% end %>
 
   <div class="field">
     <%= f.label :email %><br />

@@ -3,18 +3,17 @@ require 'rails_helper'
 describe User do
 
   before do
-    @user = User.new(first_name: 'Eigor', last_name: 'Gonzalez', email: 'eigor@editme.new', password: 'test123456')
+    @user = User.new(email: 'eigor@editme.new', password: 'test123456')
     @empty_values = ['', ' ', nil]
     @invalid_emails = %w[test test.com @.com test@ test@com test@com]
   end
 
   it 'should respond to methods' do
-    expect(@user).to respond_to :first_name
-    expect(@user).to respond_to :last_name
     expect(@user).to respond_to :email
     expect(@user).to respond_to :password
     expect(@user).to respond_to :password_confirmation
     expect(@user).to respond_to :encrypted_password
+    expect(@user).to respond_to :user_detail
   end
 
   def test_values_are_valid(base_user, attribute, values, valid)
@@ -30,12 +29,7 @@ describe User do
       expect(@user).to be_valid
     end
 
-    it 'name is present' do
-      names = %w[first_name last_name]
-      names.each do |n|
-       test_values_are_valid(@user, n, @empty_values, false)
-      end
-    end #must_match daver loves kater kind_of?
+    #must_match daver loves kater kind_of?
 
     it 'email is present and valid' do
       test_values_are_valid(@user,'email', (@invalid_emails + @empty_values), false)
@@ -89,5 +83,8 @@ describe User do
         expect(test_user).to_not be_valid
       end
     end
+  end
+
+  describe 'should include user details' do
   end
 end
