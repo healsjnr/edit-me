@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'splash_pages#splash'
   get 'splash_pages/splash'
 
-  devise_for :users #, :controllers => { :registrations => "users/registrations" }
+  devise_for :users, :controllers => { registrations: 'registrations' } #:controllers => { :registrations => "users/registrations" }
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.

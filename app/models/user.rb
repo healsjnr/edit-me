@@ -11,5 +11,6 @@ class User < ActiveRecord::Base
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
-            uniqueness: { case_sensitive: false}
+            uniqueness: { case_sensitive: false }
+  validates_inclusion_of :account_type, presence: true, in: %w(writer editor), allow_blank: false
 end

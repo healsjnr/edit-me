@@ -8,3 +8,109 @@ h264/mp4: ffmpeg -i splash_1.avi -an -vcodec libx264 -crf 23 splash_1_h264.mp4
 first frame:
 
 ffmpeg -i splash_1.avi -vframes 1 -f image2 splash_1.jpg
+
+Design
+------
+
+  User:
+    - A User object is basis of the dashboard 
+    - Describes the users attributes:
+      - Name etc
+      - User Id
+      - Email
+      - Account Type
+
+  Documents:
+    - Documents live under users and are restricted to user(s)
+    - A Document may have one editor and one writer (?)
+    - Top level element called Document that encapsulates the body of work
+      - Title
+      - Submitted Date
+      - Submitter
+      - Status (Quoting, Quote Available, In Progress, Completed)
+      - Writer
+      - Editor
+      - Tags
+      - # Quote is a separate entity?
+  DocumentInstance:
+    - An actual document version. 
+    - Has a file associated with along with version
+      - Filename
+      - Origin File name
+      - S3 link
+      - Version
+      - Parent document reference
+      - Status (Awaiting Editor, Awaiting Writer, Superceded)
+      - Editor
+      - Writer
+  Notes:
+    - Notes encapsulate the conversation about a version of a document
+      - Author
+      - Text
+
+Workflows and State:
+--------------------
+
+Document
+  New ->  Quoting -> InProgress -> Completed
+  |-> Original    |-> Versions
+  |-> Sample
+
+DocumentVersion
+  Submitted -> InProgress -> RevisionCompleted
+
+Quotes:
+  SubmittedForQuote -> QuotesAvailable -> QuoteAccepted
+                                       |-> QuoteRejected
+
+Rest API
+--------
+
+  /users/:id -> User log in and dashboard
+  /users/:id/profile -> User public profile
+  /users/:id/documents -> Users documents
+  /users/:id/documents/:doc_id/versions -> versions of the doucment
+  /users/:id/documents/:doc_id/notes -> notes on the doc
+  /users/:id/quotes -> quotes related to that user
+
+Data Models:
+------------
+
+  Users
+    - Email
+    - Devise records
+  UserDetails
+    - FirstName
+    - LastName
+    - Account Type { :writer, :editor }
+    - User Id (FK: Users.id)
+  Document
+    - OwnerId  (FK: Users.id)
+    - Title
+    - OriginalFileName
+    - OriginalDocVersionId (FK: DocumentVersions.id)
+    - Status
+  DocumentVersions
+    - VersionString
+    - OriginalFileName
+    - DocLink
+    - ParentDoc
+    - UploaderId
+    - UploaderAccountType { :editor, :writer }
+  Notes
+  Quotes
+  State?
+
+
+UI Notes:
+---------
+
+  - User has a dashboard
+  - Dashboard shows all documents listed with their states
+  - (Future) Side bar will show inbox style folders with links that filter documents by state or user tags
+  - Selecting a document expands to show all versions
+  - Notes can be shown for a version.
+  - Or notes can be shown for all version in a conversation style.
+
+
+

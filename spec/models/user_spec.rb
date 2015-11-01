@@ -3,9 +3,11 @@ require 'rails_helper'
 describe User do
 
   before do
-    @user = User.new(first_name: 'Eigor', last_name: 'Gonzalez', email: 'eigor@editme.new', password: 'test123456')
+    @user = User.new(first_name: 'Eigor', last_name: 'Gonzalez', email: 'eigor@editme.new',
+                     password: 'test123456', account_type: 'writer')
     @empty_values = ['', ' ', nil]
     @invalid_emails = %w[test test.com @.com test@ test@com test@com]
+    @invalid_accounts = %w[other thing '']
   end
 
   it 'should respond to methods' do
@@ -15,6 +17,7 @@ describe User do
     expect(@user).to respond_to :password
     expect(@user).to respond_to :password_confirmation
     expect(@user).to respond_to :encrypted_password
+    expect(@user).to respond_to :account_type
   end
 
   def test_values_are_valid(base_user, attribute, values, valid)
@@ -51,6 +54,12 @@ describe User do
 
     it 'should not be valid' do
       expect(@user).to_not be_valid
+    end
+  end
+
+  describe 'account type' do
+    it 'should be invalid when values are not allowable' do
+      test_values_are_valid(@user,'account_type', @invalid_accounts, false)
     end
   end
 
