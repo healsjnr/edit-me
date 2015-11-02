@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
 
   before_save { self.email = email.downcase }
 
+  has_many :documents, foreign_key: 'owner_id', class_name: 'Document'
+
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },

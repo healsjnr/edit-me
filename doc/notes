@@ -85,7 +85,7 @@ Data Models:
     - Account Type { :writer, :editor }
     - User Id (FK: Users.id)
   Document
-    - OwnerId  (FK: Users.id)
+    - User (FK: Users.id)
     - Title
     - OriginalFileName
     - OriginalDocVersionId (FK: DocumentVersions.id)

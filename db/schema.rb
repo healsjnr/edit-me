@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151031233459) do
+ActiveRecord::Schema.define(version: 20151102033006) do
+
+  create_table "documents", force: :cascade do |t|
+    t.integer  "owner_id"
+    t.string   "title",              null: false
+    t.string   "original_file_name", null: false
+    t.string   "status",             null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "documents", ["owner_id"], name: "index_documents_on_owner_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
