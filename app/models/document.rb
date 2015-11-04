@@ -1,5 +1,5 @@
 class Document < ActiveRecord::Base
-  #include Filterable
+  include Filterable
   belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
 
   validates :title, presence: true

@@ -6,7 +6,7 @@ RSpec.describe 'UserPages', :type => :request do
   include ApplicationHelper
 
   subject { page }
-  describe 'Documents' do
+  describe 'Get Documents' do
     it 'returns all documents' do
       FactoryGirl.create :document
       expected_docs = Document.all.to_json
