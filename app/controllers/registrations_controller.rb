@@ -1,8 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   def create
-    puts request.raw_post
-    puts 'devise create override called'
-    puts params.inspect
+    logger.debug request.raw_post
     super
     # add custom create logic here
   end
@@ -10,7 +8,6 @@ class RegistrationsController < Devise::RegistrationsController
 private
 
   def sign_up_params
-    puts "signup params called"
     params.require(:user).permit(:first_name, :last_name, :email, :account_type, :password, :password_confirmation)
   end
 

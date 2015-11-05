@@ -39,5 +39,32 @@ RSpec.describe 'UserPages', :type => :request do
       expect(response.body).to eq(expected_docs)
     end
   end
+
+  def compare_doc(actual_doc, expected_doc)
+    (actual_doc.title == expected_doc.title &&
+      actual_doc.original_file_name == expected_doc.original_file_name &&
+      actual_doc.status == expected_doc.status)
+  end
+
+  describe 'Create documents' do
+    it 'should create a valid document' do
+      user_1 = FactoryGirl.create :user, email: 'test1@email.com'
+      document = user_1.documents.build(title: 'New document', original_file_name: 'origin.doc', status: 'new')
+      request_headers = {
+          "Accept" => "application/json",
+          "Content-Type" => "application/json"
+      }
+
+      post "/documents", document.to_json, request_headers
+      expect(response.status).to eq 200
+
+      returned_doc = JSON.parse(response.body, symbolize_names: true)
+      expect(returned_doc[:title]).to eq(document.title)
+      expect(returned_doc[:status]).to eq(document.status)
+
+      created_doc = Document.where(title: document.title, owner: user_1).first
+      expect(compare_doc(document, created_doc)).to be_truthy
+    end
+  end
 end
 
