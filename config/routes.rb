@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :document_versions
   resources :documents
   root 'splash_pages#splash'
   get 'splash_pages/splash'

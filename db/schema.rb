@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151102033006) do
+ActiveRecord::Schema.define(version: 20151105212809) do
+
+  create_table "document_versions", force: :cascade do |t|
+    t.integer  "uploader_id"
+    t.string   "uploader_account_type"
+    t.string   "version"
+    t.integer  "document_id"
+    t.string   "s3_link"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "document_versions", ["document_id"], name: "index_document_versions_on_document_id"
+  add_index "document_versions", ["uploader_id"], name: "index_document_versions_on_uploader_id"
 
   create_table "documents", force: :cascade do |t|
     t.integer  "owner_id"
