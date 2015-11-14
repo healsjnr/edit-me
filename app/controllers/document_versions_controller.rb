@@ -1,0 +1,2 @@
+class DocumentVersionsController < ApplicationController
+end

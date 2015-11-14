@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :document do
-    title "MyString"
-    original_file_name "MyString"
-    status "MyString"
+    title "Factory Document 1"
+    original_file_name "Original File Name"
+    status "New"
     association :owner, factory: :user
   end
 

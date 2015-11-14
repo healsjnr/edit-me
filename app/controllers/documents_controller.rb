@@ -1,6 +1,13 @@
 class DocumentsController < ApplicationController
+  include ApplicationHelper
+  protect_from_forgery with: :exception
+  before_action :authenticate_user!
+
   def index
-    @documents = Document.filter(params.slice(:status, :owner_id))
+    current_user_id = current_user.id
+    logger.debug "current user: #{current_user_id}"
+    # Todo Need to permit pararms
+    @documents = Document.get_documents_for_user(current_user_id, params.slice(:title, :status, :original_file_name))
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,12 +17,17 @@ class DocumentsController < ApplicationController
   end
 
   def create
+    user_id = params[:owner_id].to_s
+    logger.info("UserId: #{user_id} Current User: #{current_user.id.to_s}")
     logger.debug "request: #{request.raw_post}"
-    @doc = Document.new(doc_params(params))
-    if @doc.save
-      render json: @doc
-    else
-      render json: @doc.errors, status: :unprocessable_entity
+    current_user_valid(current_user, user_id) do
+      logger.debug "Valid user."
+      @doc = Document.new(doc_params(params))
+      if @doc.save
+        render json: @doc
+      else
+        render json: @doc.errors, status: :unprocessable_entity
+      end
     end
   end
 

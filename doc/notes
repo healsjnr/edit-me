@@ -87,18 +87,29 @@ Data Models:
   Document
     - User (FK: Users.id)
     - Title
-    - OriginalFileName
-    - OriginalDocVersionId (FK: DocumentVersions.id)
+    - Description
     - Status
+    - Assignee
+    - # Metadata?
   DocumentVersions
     - VersionString
-    - OriginalFileName
     - DocLink
-    - ParentDoc
+    - DocumentId 
     - UploaderId
     - UploaderAccountType { :editor, :writer }
+    - OriginalFileName
+  QuoteRequest
+    - SubmitterId
+    - DocumentId
+    - SpecificUserId - Optional
+    - QuoteType - { JSON Object? / List }
+  QuoteResponse
+    - RequestorId
+    - SubmitterId
+    - DocumentId
+    - Ammount
+    - Status
   Notes
-  Quotes
   State?
 
 
