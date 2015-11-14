@@ -8,6 +8,9 @@ class Document < ActiveRecord::Base
   validates :status, presence: true
   validates :owner, presence: true
 
+  attr_accessor :source
+  @source
+
   scope :status, -> (status) { where status: status }
   scope :title, -> (title) { where title: title }
   scope :original_file_name, -> (fn) { where original_file_name: fn }
@@ -15,7 +18,22 @@ class Document < ActiveRecord::Base
 
   def self.get_documents_for_user(user_id, params = {})
     # To do, add in assigend docs when this is available.
-    Document.where(owner: user_id).filter(params)
+    Document.where(owner: user_id).filter(params).map { |d| d.source = :owner; d }
+  end
+
+  def as_json(options={})
+    puts "document as json called"
+    super(
+      methods: [:source],
+      include: [
+        {
+            owner: { only: User::JSON_NAME_FIELDS } },
+            document_version: { include: [{
+                  uploader: { only: User::JSON_NAME_FIELDS }
+            }]
+        }
+      ]
+    )
   end
 
 end

@@ -11,7 +11,6 @@ RSpec.describe DocumentVersion, type: :model do
         version: '1',
         s3_link: 'test_link'
     )
-    p @document_version
   end
 
 
@@ -21,5 +20,13 @@ RSpec.describe DocumentVersion, type: :model do
     expect(@document_version).to respond_to :document
     expect(@document_version).to respond_to :s3_link
     expect(@document_version).to respond_to :version
+  end
+
+  it 'should parse to JSON correctly' do
+    json_doc = JSON.parse(@document_version.to_json, symbolize_names: true)
+    expect(json_doc[:uploader]).to_not be_nil
+    expect(json_doc[:uploader][:first_name]).to eq(user_1.first_name)
+    expect(json_doc[:uploader][:last_name]).to eq(user_1.last_name)
+    expect(json_doc[:uploader][:email]).to eq(user_1.email)
   end
 end

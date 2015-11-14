@@ -13,4 +13,12 @@ class DocumentVersion < ActiveRecord::Base
   scope :uploader, -> (uploader_id) { where uploader: uploader_id }
   scope :version, -> (version) { where version: version }
   scope :document, -> (doc_id) { where document: doc_id }
+
+  def as_json(options = {})
+    super(
+        include: [{
+            uploader: { only: User::JSON_NAME_FIELDS}
+        }]
+    )
+  end
 end

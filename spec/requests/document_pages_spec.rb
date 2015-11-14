@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'shared_contexts'
 require_relative '../../app/helpers/application_helper'
 
-RSpec.describe 'UserPages', :type => :request do
+RSpec.describe 'Document Pages', :type => :request do
   include_context "api request authentication helper methods"
   include_context "api request global before and after hooks"
 
@@ -15,11 +15,15 @@ RSpec.describe 'UserPages', :type => :request do
   let(:user_2) { FactoryGirl.create :user, email: email_2, password: password }
 
   subject { page }
+
+  def add_source(docs, source = :owner)
+    docs.map { |d| d.source = source; d }
+  end
   describe 'Get Documents' do
     it 'returns all documents' do
       FactoryGirl.create(:document, owner: user_1)
       FactoryGirl.create(:document, owner: user_2)
-      expected_docs = Document.where(owner_id: user_1).to_json
+      expected_docs = add_source(Document.where(owner_id: user_1)).to_json
 
       sign_in(user_1)
       get "/documents", {}, {"Accept" => "application/json"}
@@ -31,7 +35,7 @@ RSpec.describe 'UserPages', :type => :request do
       FactoryGirl.create :document, owner: user_1
       FactoryGirl.create :document, status: 'new', owner: user_1
       FactoryGirl.create :document, status: 'new', owner: user_1
-      expected_docs = Document.where(status: 'new').to_json
+      expected_docs = add_source(Document.where(status: 'new')).to_json
 
       sign_in(user_1)
       get "/documents?status=new", {}, {"Accept" => "application/json"}
@@ -42,7 +46,7 @@ RSpec.describe 'UserPages', :type => :request do
     it 'returns documents with owner_id' do
       FactoryGirl.create :document, owner: user_1
       FactoryGirl.create :document, owner: user_2
-      expected_docs = Document.where(owner: user_2).to_json
+      expected_docs = add_source(Document.where(owner: user_2)).to_json
 
       sign_in(user_2)
       get "/documents?owner_id=2", {}, {"Accept" => "application/json"}

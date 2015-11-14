@@ -41,11 +41,17 @@ RSpec.describe Document, type: :model do
       user_2.save
     end
 
+    def check_source(results, expected_source)
+      results.each { |r| expect(r.source).to eq(expected_source)}
+    end
+
     it 'should only returns documents for the right user' do
       results_1 = Document.get_documents_for_user(user_1.id)
       expect(results_1).to eq(@user_1_docs)
+      check_source(results_1, :owner)
       results_2 = Document.get_documents_for_user(user_2.id)
       expect(results_2).to eq(@user_2_docs)
+      check_source(results_2, :owner)
       expect(results_1).to_not eq(results_2)
     end
 
@@ -78,5 +84,50 @@ RSpec.describe Document, type: :model do
       expect(results_1.size).to be 0
       expect(results_1).to eq []
     end
+  end
+
+  describe 'as json' do
+    it 'should include owner details' do
+      json_doc = JSON.parse(@document.to_json, symbolize_names: true)
+      p json_doc
+      expect(json_doc[:owner]).to_not be_nil
+      expect(json_doc[:owner][:first_name]).to eq(user.first_name)
+      expect(json_doc[:owner][:last_name]).to eq(user.last_name)
+    end
+
+    def compare_doc_version(doc_version_hash, doc_version)
+      expect(doc_version_hash[:version]).to eq(doc_version.version)
+      expect(doc_version_hash[:s3_link]).to eq(doc_version.s3_link)
+      expect(doc_version_hash[:uploader_id]).to eq(doc_version.uploader.id)
+      expect(doc_version_hash[:uploader_account_type]).to eq(doc_version.uploader_account_type)
+      expect(doc_version_hash[:uploader][:first_name]).to eq(doc_version.uploader.first_name)
+      expect(doc_version_hash[:uploader][:last_name]).to eq(doc_version.uploader.last_name)
+      expect(doc_version_hash[:uploader][:email]).to eq(doc_version.uploader.email)
+    end
+
+    it 'should include document version details' do
+      document_version_1 = @document.document_version.build(
+          uploader: user_1,
+          uploader_account_type: user_1.account_type,
+          version: '1',
+          s3_link: 'test_link_1'
+      )
+      document_version_2 = @document.document_version.build(
+          uploader: user_2,
+          uploader_account_type: user_1.account_type,
+          version: '2',
+          s3_link: 'test_link_2'
+      )
+      @document.save
+
+      json_doc = JSON.parse(@document.to_json, symbolize_names: true)
+      expect(json_doc[:document_version]).to_not be_nil
+
+      doc_version = json_doc[:document_version]
+      expect(doc_version.length).to eq(2)
+      compare_doc_version(doc_version[0], document_version_1)
+      compare_doc_version(doc_version[1], document_version_2)
+    end
+
   end
 end
