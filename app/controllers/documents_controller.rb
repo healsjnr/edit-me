@@ -7,7 +7,7 @@ class DocumentsController < ApplicationController
     current_user_id = current_user.id
     logger.debug "current user: #{current_user_id}"
     # Todo Need to permit pararms
-    @documents = Document.get_documents_for_user(current_user_id, params.slice(:title, :status, :original_file_name))
+    @documents = Document.get_documents_for_user(current_user_id, allowed_get_params(params))
 
     respond_to do |format|
       format.html # index.html.erb
@@ -32,6 +32,11 @@ class DocumentsController < ApplicationController
   end
 
   private
+
+  def allowed_get_params(params)
+    params.slice(:title, :status, :original_file_name)
+  end
+
   def doc_params(supplied_params)
     supplied_params.require(:document).permit(:title, :original_file_name, :status, :owner_id)
   end

@@ -76,6 +76,8 @@ Rest API
 Data Models:
 ------------
 
+  NOTE: we need Collaborators table that maps users to documents they can work on.
+
   Users
     - Email
     - Devise records

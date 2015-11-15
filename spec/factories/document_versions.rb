@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :document_version do
-    user factory: :user
+    uploader factory: :user
     version "1"
     document factory: :document
     uploader_account_type "writer"

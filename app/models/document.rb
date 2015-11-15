@@ -22,7 +22,8 @@ class Document < ActiveRecord::Base
   end
 
   def as_json(options={})
-    puts "document as json called"
+    # At some point replace this with
+    # https://github.com/rails-api/active_model_serializers
     super(
       methods: [:source],
       include: [
