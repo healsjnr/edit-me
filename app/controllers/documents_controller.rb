@@ -23,6 +23,7 @@ class DocumentsController < ApplicationController
     current_user_valid(current_user, user_id) do
       logger.debug "Valid user."
       @doc = Document.new(doc_params(params))
+      @doc.source = 'owner'
       if @doc.save
         render json: @doc
       else

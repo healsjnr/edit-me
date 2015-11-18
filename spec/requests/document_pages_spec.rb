@@ -70,6 +70,7 @@ RSpec.describe 'Document Pages', :type => :request do
       }
 
       sign_in(user_1)
+      p document.to_json
       post "/documents", document.to_json, request_headers
       expect(response.status).to eq 200
 

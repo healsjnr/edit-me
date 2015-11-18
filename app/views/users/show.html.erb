@@ -1,2 +1,3 @@
-<%= "Name: #{@user.first_name} #{@user.last_name}" %>
-<%= "Email: #{@user.email}" %>
+<div class="container-fluid">
+  <%= react_component 'User', { user: @user} %>
+</div>

@@ -15,6 +15,7 @@ gem 'devise'
 gem 'factory_girl_rails'
 gem 'react-rails', '~> 1.3.0'
 gem 'responders', '~> 2.0'
+gem 'momentjs-rails'
 
 group :development, :test do
   gem 'spring'
