@@ -1,3 +1,6 @@
+var DocumentVersion = require('./DocumentVersion');
+var DocumentVersionForm = require('./DocumentVersionForm');
+var renderDate = require('utils');
 var Document = React.createClass({
     getInitialState: function () {
         return {documentVersions: this.props.document.document_version};
@@ -44,3 +47,4 @@ Document.propTypes = {
     user: React.PropTypes.object.isRequired,
     document: React.PropTypes.object.isRequired
 };
+module.exports = Document;

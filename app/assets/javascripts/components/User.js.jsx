@@ -1,3 +1,4 @@
+var Documents = require('./Documents');
 var User = React.createClass({
         render: function() {
             return (
@@ -14,3 +15,5 @@ var User = React.createClass({
 User.propTypes = {
     user: React.PropTypes.object.isRequired
 };
+
+module.exports = User;

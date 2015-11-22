@@ -1,5 +1,7 @@
+console.log("defining document form");
+var TestUpload = require('./TestUpload');
 var DocumentVersionForm = React.createClass({
-        getInitialState: function() {
+        getInitialState: function () {
             return {
                 "uploader_id": this.props.user.id,
                 "uploader_account_type": this.props.user.account_type,
@@ -7,17 +9,17 @@ var DocumentVersionForm = React.createClass({
                 "s3_link": ''
             };
         },
-        handleChange: function(e) {
+        handleChange: function (e) {
             var name = e.target.name;
             var obj = {};
-            obj[""+name] = e.target.value;
+            obj["" + name] = e.target.value;
             this.setState(obj);
         },
-        handleCallback: function(data) {
+        handleCallback: function (data) {
             this.props.handleNewDocumentVersion(data);
             this.setState(this.getInitialState);
         },
-        handleSubmit: function(e) {
+        handleSubmit: function (e) {
             var requestData = JSON.stringify(this.state)
             e.preventDefault();
             var xhr = $.ajax({
@@ -30,26 +32,32 @@ var DocumentVersionForm = React.createClass({
                 success: this.handleCallback
             })
         },
-        valid: function() {
+        valid: function () {
             return this.state.s3_link;
         },
-        render: function() {
+        render: function () {
             return (
-                <form className="form-inline" onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                        <input type="text" className="form-control" placeholder="S3 Linke" name="s3_link" value={this.state.s3_link} onChange={this.handleChange}/>
-                    </div>
-                    <button type="submit" className="btn btn-primary" disabled={!this.valid}>
-                        New Document
-                    </button>
-                </form>
+                <div>
+                    <form className="form-inline" onSubmit={this.handleSubmit}>
+                        <div className="form-group">
+                            <input type="text" className="form-control" placeholder="S3 Linke" name="s3_link"
+                                   value={this.state.s3_link} onChange={this.handleChange}/>
+                        </div>
+                        <button type="submit" className="btn btn-primary" disabled={!this.valid}>
+                            New Document
+                        </button>
+                    </form>
+                    <TestUpload/>
+                </div>
             );
         }
     }
 );
 
+console.log("document form defined");
 DocumentVersionForm.propTypes = {
     user: React.PropTypes.object.isRequired,
     document: React.PropTypes.object.isRequired,
     handleNewDocumentVersion: React.PropTypes.func.isRequired
 };
+module.exports = DocumentVersionForm;

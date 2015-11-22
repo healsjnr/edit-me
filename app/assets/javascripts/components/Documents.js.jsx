@@ -1,3 +1,5 @@
+var Document = require('./Document');
+var DocumentForm = require('./DocumentForm');
 var Documents = React.createClass({
     getInitialState: function () {
         // Todo: They recomend storing minimal state, so maybe I should transpose this into a view object.
@@ -52,3 +54,5 @@ var Documents = React.createClass({
 Documents.propTypes = {
     user: React.PropTypes.object.isRequired
 };
+
+module.exports = Documents;

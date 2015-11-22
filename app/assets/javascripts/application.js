@@ -17,4 +17,7 @@
 //= require react_ujs
 //= require components
 //= require moment
-//= require_tree .
+
+window.ReactS3Uploader = require('react-s3-uploader');
+
+

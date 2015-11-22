@@ -1,3 +1,4 @@
+var renderDate = require('utils');
 var DocumentVersion = React.createClass({
     renderName: function(uploader) {
         return uploader.first_name.capitalizeFirstLetter() + " " + uploader.last_name.capitalizeFirstLetter();
@@ -21,3 +22,4 @@ var DocumentVersion = React.createClass({
 DocumentVersion.propTypes = {
     documentVersion: React.PropTypes.object.isRequired
 };
+module.exports = DocumentVersion;

@@ -5,3 +5,6 @@ String.prototype.capitalizeFirstLetter = function() {
 function renderDate(dateString) {
     return moment(dateString).local().format("MMMM Do YYYY HH:mm");
 }
+
+module.exports = renderDate;
+

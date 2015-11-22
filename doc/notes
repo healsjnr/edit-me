@@ -9,6 +9,12 @@ first frame:
 
 ffmpeg -i splash_1.avi -vframes 1 -f image2 splash_1.jpg
 
+React
+-----
+
+Need to remove var React from react-s3-uploader otherwise we import it twice. 
+Or find some other way to do this.
+
 Design
 ------
 

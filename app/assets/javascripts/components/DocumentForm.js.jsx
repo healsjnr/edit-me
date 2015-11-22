@@ -21,7 +21,7 @@ var DocumentForm = React.createClass({
         handleSubmit: function(e) {
             var requestData = JSON.stringify(this.state)
             e.preventDefault();
-            var xhr = $.ajax({
+            $.ajax({
                 url: '/documents',
                 type: 'POST',
                 data: requestData,
@@ -56,3 +56,5 @@ DocumentForm.propTypes = {
     user: React.PropTypes.object.isRequired,
     handleNewDocument: React.PropTypes.func.isRequired
 };
+
+module.exports = DocumentForm;
