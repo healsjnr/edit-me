@@ -2,14 +2,13 @@ var TestUpload = React.createClass({
     render: function () {
         return (
             <ReactS3Uploader
-                signingUrl="/s3/sign"
-                accept="image/*"
+                signingUrl="/s3/uploadUrl"
+                accept="*/*"
                 onProgress={this.onUploadProgress}
                 onError={this.onUploadError}
                 onFinish={this.onUploadFinish}
                 uploadRequestHeaders={{ 'x-amz-acl': 'public-read' }}
-                contentDisposition="auto"
-                server="http://cross-origin-server.com"/>
+                contentDisposition="inline" />
 
         );
     }

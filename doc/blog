@@ -1,0 +1,11 @@
+React: 
+
+  - Importing third party libs make sure you don't reimport React our you will get the firstChile error. This is an issue if you use vanilla react_rails
+  - React rails requires all components to be deinfed global so use:
+     window.React... = require('....') to ensure this.
+  - S3 upload: 
+    - make sure you have CORS
+    - OPTIONS preflight check doens't always mean CORS is wrong. Could be another Auth error.
+    - EG., make sure region is set in URL. Otherwise a 301 redirect is returned, but is not follow.
+    - Browser then treats this as a failure as no AccessOrigin header is returned. 
+  

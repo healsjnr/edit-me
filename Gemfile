@@ -17,6 +17,8 @@ gem 'react-rails', '~> 1.3.0'
 gem 'responders', '~> 2.0'
 gem 'momentjs-rails'
 gem 'browserify-rails'
+gem 'fog'
+gem 'aws-sdk', '~> 2'
 
 group :development, :test do
   gem 'spring'
