@@ -33,8 +33,7 @@ class S3Controller < ApplicationController
     options = {path_style: true}
     headers = {
         'Content-Type' => params[:contentType],
-        'x-amz-acl' => 'public-read',
-        'Access-Control-Allow-Origin' => '*'
+        'x-amz-acl' => 'public-read'
     }
 
     @url = FOG_CONNECTION.put_object_url('edit-me', "dev/uploads/#{params[:objectName]}", 15.minutes.from_now.to_time.to_i, headers, options)
