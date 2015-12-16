@@ -13,6 +13,7 @@ WORKDIR /tmp
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
 RUN bundle install
+RUN npm install update
 
 # Add rails project to project directory
 ADD ./ /rails

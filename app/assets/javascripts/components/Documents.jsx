@@ -1,5 +1,5 @@
-var Document = require('./Document');
-var DocumentForm = require('./DocumentForm');
+var Document = require('./Document.jsx');
+var DocumentForm = require('./DocumentForm.jsx');
 var Documents = React.createClass({
     getInitialState: function () {
         // Todo: They recomend storing minimal state, so maybe I should transpose this into a view object.

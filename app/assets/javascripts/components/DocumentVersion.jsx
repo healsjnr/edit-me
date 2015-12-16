@@ -1,4 +1,4 @@
-var renderDate = require('utils');
+var renderDate = require('../utils');
 var DocumentVersion = React.createClass({
     renderName: function(uploader) {
         return uploader.first_name.capitalizeFirstLetter() + " " + uploader.last_name.capitalizeFirstLetter();
