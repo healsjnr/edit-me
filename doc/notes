@@ -15,6 +15,12 @@ React
 Need to remove var React from react-s3-uploader otherwise we import it twice. 
 Or find some other way to do this.
 
+s3 Uploader:
+
+  To PR changes:
+    * Add file and uploadedFileName to the onFinish call back in ReactS3Uploader
+    * Update s3 Uploader to calculate uploadFileName initially and send to callback.
+
 Design
 ------
 

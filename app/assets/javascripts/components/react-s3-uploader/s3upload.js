@@ -2,7 +2,7 @@
  * Taken, CommonJS-ified, and heavily modified from:
  * https://github.com/flyingsparx/NodeDirectUploader
  */
- 
+
 var latinize = require('latinize'),
     unorm = require('unorm');
 
@@ -62,8 +62,7 @@ S3Upload.prototype.createCORSRequest = function(method, url) {
 };
 
 S3Upload.prototype.executeOnSignedUrl = function(file, callback) {
-    var xhr = new XMLHttpRequest();
-    var normalizedFileName = file.name.replace(/\s+/g, "_").normalize();
+    var normalizedFileName = unorm.nfc(file.name.replace(/\s+/g, "_"));
     var fileName = latinize(normalizedFileName);
     var queryString = '?objectName=' + fileName + '&contentType=' + file.type;
     if (this.signingUrlQueryParams) {
@@ -73,7 +72,8 @@ S3Upload.prototype.executeOnSignedUrl = function(file, callback) {
             queryString += '&' + key + '=' + val;
         });
     }
-    xhr.open('GET', this.signingUrl + queryString, true);
+    var xhr = this.createCORSRequest('GET',
+        this.server + this.signingUrl + queryString);
     if (this.signingUrlHeaders) {
         var signingUrlHeaders = this.signingUrlHeaders;
         Object.keys(signingUrlHeaders).forEach(function(key) {
@@ -91,6 +91,7 @@ S3Upload.prototype.executeOnSignedUrl = function(file, callback) {
                 this.onError('Invalid signing server response JSON: ' + xhr.responseText, file);
                 return false;
             }
+            result.uploadedFileName = fileName;
             return callback(result);
         } else if (xhr.readyState === 4 && xhr.status !== 200) {
             return this.onError('Could not contact request signing server. Status = ' + xhr.status, file);
@@ -133,7 +134,7 @@ S3Upload.prototype.uploadToS3 = function(file, signResult) {
                 disposition = 'attachment';
             }
         }
-        var normalizedFileName = file.name.replace(/\s+/g, "_").normalize();
+        var normalizedFileName = unorm.nfc(file.name.replace(/\s+/g, "_"));
         var fileName = latinize(normalizedFileName);
         xhr.setRequestHeader('Content-Disposition', disposition + '; filename=' + fileName);
     }
