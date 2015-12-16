@@ -18,6 +18,6 @@
 //= require components
 //= require moment
 
-window.ReactS3Uploader = require('react-s3-uploader');
+//window.ReactS3Uploader = require('react-s3-uploader');
 
 

@@ -1,9 +1,7 @@
-console.log("defining document form");
-var TestUpload = require('./TestUpload');
 var DocumentVersionForm = React.createClass({
         getInitialState: function () {
             return {
-                "uploader_id": this.props.user.id,
+                "uploader_id": this.props.user.id, // These probably don't need to be state as they never change.
                 "uploader_account_type": this.props.user.account_type,
                 "document_id": this.props.document.id,
                 "s3_link": ''
@@ -32,6 +30,22 @@ var DocumentVersionForm = React.createClass({
                 success: this.handleCallback
             })
         },
+        createDocument: function(requestData) {
+            $.ajax({
+                url: '/document_versions',
+                type: 'POST',
+                data: requestData,
+                contentType: 'application/json',
+                accept: 'application/json',
+                dataType: 'json',
+                success: this.handleCallback
+            })
+        },
+        handleFinished: function(signResult, file) {
+            console.log("Finished called.");
+            console.log("File: " + file.name);
+            console.log(signResult);
+        },
         valid: function () {
             return this.state.s3_link;
         },
@@ -47,14 +61,20 @@ var DocumentVersionForm = React.createClass({
                             New Document
                         </button>
                     </form>
-                    <TestUpload/>
+                    <ReactS3Uploader
+                        signingUrl="/s3/uploadUrl"
+                        accept="*/*"
+                        onProgress={this.onUploadProgress}
+                        onError={this.onUploadError}
+                        onFinish={this.handleFinished}
+                        uploadRequestHeaders={{ 'x-amz-acl': 'public-read' }}
+                        contentDisposition="inline" />
                 </div>
             );
         }
     }
 );
 
-console.log("document form defined");
 DocumentVersionForm.propTypes = {
     user: React.PropTypes.object.isRequired,
     document: React.PropTypes.object.isRequired,

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :documents
   root 'splash_pages#splash'
   get 'splash_pages/splash'
+  get 's3/uploadUrl' => 's3#upload'
 
   devise_for :users, :controllers => { registrations: 'registrations' } #:controllers => { :registrations => "users/registrations" }
   resources :users
