@@ -1,6 +1,6 @@
-var DocumentVersion = require('./DocumentVersion');
-var DocumentVersionForm = require('./DocumentVersionForm');
-var renderDate = require('utils');
+var DocumentVersion = require('./DocumentVersion.jsx');
+var DocumentVersionForm = require('./DocumentVersionForm.jsx');
+var renderDate = require('../utils');
 var Document = React.createClass({
     getInitialState: function () {
         return {documentVersions: this.props.document.document_version};

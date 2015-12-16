@@ -1,4 +1,4 @@
-var Documents = require('./Documents');
+var Documents = require('./Documents.jsx');
 var User = React.createClass({
         render: function() {
             return (
