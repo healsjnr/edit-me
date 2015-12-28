@@ -26,13 +26,14 @@ var Document = React.createClass({
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-3"> <h3>{this.props.document.title} </h3></div>
-                    <div className="col-md-2"> {this.props.document.status} </div>
-                    <div className="col-md-2"> {this.props.document.source} </div>
-                    <div className="col-md-2"> {renderDate(this.props.document.created_at)} </div>
-                    <div className="col-md-2"> {renderDate(this.props.document.updated_at)} </div>
+                    <div className="col-md-2"> <h3>{this.props.document.status} </h3></div>
+                    <div className="col-md-2"> <h3>{this.props.document.source} </h3></div>
+                    <div className="col-md-2"> <h4>{renderDate(this.props.document.created_at)} </h4></div>
+                    <div className="col-md-2"> <h4>{renderDate(this.props.document.updated_at)} </h4></div>
                 </div>
                 <div className="row">{this.buildDocumentVersion()}</div>
                 <div className="row">
+                    <hr/>
                     <DocumentVersionForm handleNewDocumentVersion={this.addDocumentVersion}
                                          document={this.props.document}
                                          user={this.props.user} />
