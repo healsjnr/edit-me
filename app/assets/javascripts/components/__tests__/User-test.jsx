@@ -1,7 +1,8 @@
 jest.dontMock('../User');
 
-React       = require('react/addons');
-TestUtils   = React.addons.TestUtils;
+React       = require('react');
+ReactDOM    = require('react-dom');
+TestUtils   = require('react-addons-test-utils');
 
 describe('User', function() {
     it('should tell use the users name', function() {
@@ -12,7 +13,7 @@ describe('User', function() {
             <User user= {userProps} />
         );
 
-        var userNode = user.getDOMNode();
+        var userNode = ReactDOM.findDOMNode(user);
         expect(userNode.textContent).toEqual('Eigor Gonzalez');
     });
 });
