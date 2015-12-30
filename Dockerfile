@@ -21,7 +21,7 @@ ADD ./ /rails
 
 # set WORKDIR
 WORKDIR /rails
-RUN npm install update
+RUN npm install
 
 # Generate key base
 RUN bundle exec rake secret >> key_base
