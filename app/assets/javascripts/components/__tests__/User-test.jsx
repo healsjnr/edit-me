@@ -1,12 +1,13 @@
 jest.dontMock('../User');
 
-React       = require('react');
-ReactDOM    = require('react-dom');
-TestUtils   = require('react-addons-test-utils');
+global.React       = require('react');
+global.ReactDOM    = require('react-dom');
+global.TestUtils   = require('react-addons-test-utils');
 
-describe('User', function() {
-    it('should tell use the users name', function() {
-        var User = require('../User');
+const User = require('../User');
+
+describe('User', () => {
+    it('should tell use the users name', () => {
         var userProps = {first_name: 'eigor', last_name: 'gonzalez'};
 
         var user = TestUtils.renderIntoDocument(
