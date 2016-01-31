@@ -1,19 +1,18 @@
-var Documents = require('./Documents.jsx');
-var User = React.createClass({
-        render: function() {
-            return (
-                  <div className='user'>
-                      <h1>{this.props.user.first_name.capitalizeFirstLetter()} {this.props.user.last_name.capitalizeFirstLetter()}</h1>
-                      <hr/>
-                      <Documents user={this.props.user}/>
-                  </div>
-            );
-        }
-    }
-);
+require('../utils.js');
+import Documents from "./Documents.jsx";
 
-User.propTypes = {
-    user: React.PropTypes.object.isRequired
-};
+export default class User extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-module.exports = User;
+  render() {
+    return (
+      <div className='user'>
+        <h1>{this.props.user.first_name.capitalizeFirstLetter()} {this.props.user.last_name.capitalizeFirstLetter()}</h1>
+        <hr/>
+        <Documents user={this.props.user}/>
+      </div>
+    );
+  }
+}

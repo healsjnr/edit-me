@@ -4,7 +4,7 @@ global.React       = require('react');
 global.ReactDOM    = require('react-dom');
 global.TestUtils   = require('react-addons-test-utils');
 
-const User = require('../User');
+const User = require('../User').default;
 
 describe('User', () => {
     it('should tell use the users name', () => {
