@@ -4,21 +4,19 @@ class DocumentVersionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    # Todo Need to permit pararms
     @document_versions = DocumentVersion.get_doc_versions(current_user, allowed_get_params(params))
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.xml  { render :xml => @document_versions}
       format.json  { render :json => @document_versions.to_json }
     end
   end
 
   def create
-    #TODO need to allow creation when user is part of the collaborators
+    # TODO -- Collaborators: need to allow creation when user is part of the collaborators
     user_id = params[:uploader_id].to_s
-    logger.info("UserId: #{user_id} Current User: #{current_user.id.to_s}")
-    logger.debug "request: #{request.raw_post}"
+    logger.debug "Document Version request: #{request.raw_post}"
     current_user_valid(current_user, user_id) do
       @doc_version = DocumentVersion.create_document(doc_version_params(params))
       if @doc_version.save

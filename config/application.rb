@@ -28,5 +28,8 @@ module EditMe
     # config.i18n.default_locale = :de
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif *.mp4)
     config.browserify_rails.commandline_options = "-t babelify --extension=\".js.jsx\""
+
+    # Load the s3 Config.
+    config.x.s3 = Rails.application.config_for(:s3)
   end
 end

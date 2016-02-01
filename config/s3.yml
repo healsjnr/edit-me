@@ -1,0 +1,14 @@
+default: &default
+  bucket: edit-me
+  folder: test/uploads
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+  folder: test/uploads
+
+production:
+  <<: *default
+  folder: prod/uploads

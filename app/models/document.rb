@@ -9,7 +9,6 @@ class Document < ActiveRecord::Base
   validates :owner, presence: true
 
   attr_accessor :source
-  @source
 
   scope :status, -> (status) { where status: status }
   scope :title, -> (title) { where title: title }
@@ -17,13 +16,12 @@ class Document < ActiveRecord::Base
   scope :owner_id, -> (owner_id) { where owner: owner_id }
 
   def self.get_documents_for_user(user_id, params = {})
-    # To do, add in assigend docs when this is available.
+    # To do, add in assigned docs when this is available.
     Document.where(owner: user_id).filter(params).map { |d| d.source = :owner; d }
   end
 
   def as_json(options={})
-    # At some point replace this with
-    # https://github.com/rails-api/active_model_serializers
+    # TODO -- At some point replace this with https://github.com/rails-api/active_model_serializers
     super(
       methods: [:source],
       include: [

@@ -11,7 +11,7 @@ Notes on setup:
 
 To Deploy a new build:
   - Commit to develop
-  - Check that dockerhup has build the latest version
+  - Check that dockerhub has build the latest version
   - Log in to digital ocean. Run the rebuild from initial snapshot option under destroy.
 
 ## INIT script on docker dev.

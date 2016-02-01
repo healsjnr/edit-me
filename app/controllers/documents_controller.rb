@@ -5,12 +5,11 @@ class DocumentsController < ApplicationController
 
   def index
     current_user_id = current_user.id
-    logger.debug "current user: #{current_user_id}"
-    # Todo Need to permit pararms
+    logger.debug "Current user: #{current_user_id}"
     @documents = Document.get_documents_for_user(current_user_id, allowed_get_params(params))
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html
       format.xml  { render :xml => @documents}
       format.json  { render :json => @documents.to_json }
     end
@@ -18,11 +17,11 @@ class DocumentsController < ApplicationController
 
   def create
     user_id = params[:owner_id].to_s
-    logger.info("UserId: #{user_id} Current User: #{current_user.id.to_s}")
-    logger.debug "request: #{request.raw_post}"
+    logger.debug "Create request: #{request.raw_post}"
     current_user_valid(current_user, user_id) do
-      logger.debug "Valid user."
       @doc = Document.new(doc_params(params))
+
+      # Set the doc source as Owner as this user has created this doc
       @doc.source = 'owner'
       if @doc.save
         render json: @doc
