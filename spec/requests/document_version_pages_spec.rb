@@ -67,6 +67,7 @@ RSpec.describe 'Document Version Pages', :type => :request do
         'version', 'id', 'created_at', 'updated_at', 'uploader'
     ).to_json
   end
+
   describe 'create a document version' do
     it 'should create a document version for a document' do
       doc_1_version_1.save
